@@ -41,6 +41,7 @@ func ParsePath(s string) (Path, error) {
 	// remove master prefix if present
 	s = strings.TrimPrefix(s, "m/")
 
+	//nolint:prealloc
 	var path []uint32
 	for i, key := range strings.Split(s, "/") {
 		matches := keyReg.FindStringSubmatch(key)
@@ -65,7 +66,7 @@ func ParsePath(s string) (Path, error) {
 // String returns the string form of the BIP-32 path.
 // It returns:
 // - "m" for an empty path
-// - apostrophe for hardened keys ("m/44'/0'/0'/0/0")
+// - apostrophe for hardened keys ("m/44'/0'/0'/0/0").
 func (p Path) String() string {
 	var builder strings.Builder
 	builder.WriteByte('m')

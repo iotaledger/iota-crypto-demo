@@ -3,8 +3,8 @@ package eddsa
 import (
 	"errors"
 
-	"github.com/wollac/iota-crypto-demo/pkg/ed25519"
-	"github.com/wollac/iota-crypto-demo/pkg/slip10"
+	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
+	"github.com/iotaledger/iota-crypto-demo/pkg/slip10"
 )
 
 // ErrNotHardened is returned when the input led to an invalid private or public key.
@@ -53,6 +53,7 @@ func (Seed) IsPrivate() bool {
 // Public returns the corresponding PublicKey.
 func (s Seed) Public() slip10.Key {
 	priv := ed25519.NewKeyFromSeed(s)
+	//nolint:forcetypeassert
 	return PublicKey(priv.Public().(ed25519.PublicKey))
 }
 
@@ -70,6 +71,7 @@ func (Seed) Shift(buf []byte) (slip10.Key, error) {
 // Ed25519Key generates the corresponding public/private key pair.
 func (s Seed) Ed25519Key() (ed25519.PublicKey, ed25519.PrivateKey) {
 	privateKey := ed25519.NewKeyFromSeed(s.Bytes())
+	//nolint:forcetypeassert
 	return privateKey.Public().(ed25519.PublicKey), privateKey
 }
 

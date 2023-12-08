@@ -11,5 +11,3 @@ jobs:
 
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v2
-      with:
-        args: --disable errcheck

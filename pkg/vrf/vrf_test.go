@@ -1,15 +1,17 @@
+//nolint:scopelint
 package vrf
 
 import (
 	"bytes"
+	"crypto/rand"
 	"encoding/json"
-	"math/rand"
 	"os"
 	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/wollac/iota-crypto-demo/internal/hexutil"
+
+	"github.com/iotaledger/iota-crypto-demo/internal/hexutil"
 )
 
 var nullSeed = make([]byte, SeedSize)
@@ -69,7 +71,7 @@ func BenchmarkProve(b *testing.B) {
 	_, privateKey, _ := GenerateKey(nil)
 	data := make([][benchAlphaLen]byte, b.N)
 	for i := range data {
-		rand.Read(data[i][:])
+		_, _ = rand.Read(data[i][:])
 	}
 
 	b.ResetTimer()
@@ -87,7 +89,7 @@ func BenchmarkVerify(b *testing.B) {
 	}, b.N)
 	for i := range data {
 		data[i].alpha = make([]byte, benchAlphaLen)
-		rand.Read(data[i].alpha)
+		_, _ = rand.Read(data[i].alpha)
 		data[i].pi = Prove(privateKey, data[i].alpha).Bytes()
 	}
 
@@ -99,11 +101,11 @@ func BenchmarkVerify(b *testing.B) {
 
 func BenchmarkEncodeToCurve(b *testing.B) {
 	encodeToCurveSalt := make([]byte, 32)
-	rand.Read(encodeToCurveSalt)
+	_, _ = rand.Read(encodeToCurveSalt)
 	data := make([][]byte, b.N)
 	for i := range data {
 		data[i] = make([]byte, benchAlphaLen)
-		rand.Read(data[i])
+		_, _ = rand.Read(data[i])
 	}
 
 	b.ResetTimer()

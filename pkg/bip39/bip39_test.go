@@ -1,3 +1,4 @@
+//nolint:scopelint
 package bip39
 
 import (
@@ -11,7 +12,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/wollac/iota-crypto-demo/internal/hexutil"
+
+	"github.com/iotaledger/iota-crypto-demo/internal/hexutil"
 )
 
 type Test struct {

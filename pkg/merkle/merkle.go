@@ -9,7 +9,7 @@ import (
 	"math/bits"
 )
 
-// Domain separation prefixes
+// Domain separation prefixes.
 const (
 	LeafHashPrefix = 0
 	NodeHashPrefix = 1

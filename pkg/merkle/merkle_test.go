@@ -1,3 +1,4 @@
+//nolint:scopelint,nosnakecase
 package merkle
 
 import (

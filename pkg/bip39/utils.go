@@ -11,7 +11,7 @@ const (
 	entropyMaxBits  = 512
 )
 
-// bit mask for the 11 least significant bits
+// bit mask for the 11 least significant bits.
 var wordIndexMask = big.NewInt(1<<11 - 1)
 var bigOne = big.NewInt(1)
 
@@ -23,7 +23,7 @@ func wordCountToEntropyBits(n int) int {
 	return 32 * n / 3
 }
 
-// check that the number of bits is within max, min and a multiple of 32
+// check that the number of bits is within max, min and a multiple of 32.
 func validateEntropy(entropy []byte) error {
 	ent := len(entropy) * 8
 	if ent%entropyMultiple != 0 || entropyMinBits > ent || ent > entropyMaxBits {

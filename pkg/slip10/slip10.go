@@ -28,7 +28,7 @@ import (
 	"fmt"
 	"hash"
 
-	"golang.org/x/crypto/ripemd160" //nolint:staticcheck,deprecated
+	"golang.org/x/crypto/ripemd160" //nolint:staticcheck
 )
 
 const (

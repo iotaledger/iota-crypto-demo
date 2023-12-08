@@ -5,7 +5,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wollac/iota-crypto-demo/pkg/ed25519"
+
+	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
 )
 
 var message = []byte("Zcash")

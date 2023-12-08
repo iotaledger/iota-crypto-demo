@@ -1,3 +1,4 @@
+//nolint:scopelint
 package bech32
 
 import (
@@ -7,7 +8,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/wollac/iota-crypto-demo/pkg/bech32/internal/base32"
+
+	"github.com/iotaledger/iota-crypto-demo/pkg/bech32/internal/base32"
 )
 
 func TestEncode(t *testing.T) {

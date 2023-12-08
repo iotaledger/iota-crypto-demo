@@ -1,11 +1,13 @@
+//nolint:scopelint
 package vrf
 
 import (
-	"math/rand"
+	"crypto/rand"
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/wollac/iota-crypto-demo/internal/hexutil"
+
+	"github.com/iotaledger/iota-crypto-demo/internal/hexutil"
 )
 
 func TestNewPointFromCanonicalBytes(t *testing.T) {
@@ -147,7 +149,7 @@ func TestNewPointFromCanonicalBytes(t *testing.T) {
 func BenchmarkNewPointFromCanonicalBytes(b *testing.B) {
 	data := make([][32]byte, b.N)
 	for i := range data {
-		rand.Read(data[i][:])
+		_, _ = rand.Read(data[i][:])
 	}
 
 	b.ResetTimer()
