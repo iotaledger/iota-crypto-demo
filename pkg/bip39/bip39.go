@@ -7,7 +7,7 @@ This package supports entropy lengths from 128 to 512 bits as long as they are a
 multiple of 32 bits.
 
 It comes with the official English and Japanese word list, but different word
-lists can be registered using RegisterWordList as long as they fulfil the
+lists can be registered using RegisterWordList as long as they fullfil the
 requirements for a BIP-0039 word list.
 
 This package is tested against the test vectors provided in the official
@@ -22,10 +22,11 @@ import (
 	"log"
 	"math/big"
 
-	"github.com/iotaledger/iota-crypto-demo/pkg/bip39/internal/wordlists"
-	"github.com/iotaledger/iota-crypto-demo/pkg/bip39/wordlist"
 	"golang.org/x/crypto/pbkdf2"
 	"golang.org/x/text/unicode/norm"
+
+	"github.com/iotaledger/iota-crypto-demo/pkg/bip39/internal/wordlists"
+	"github.com/iotaledger/iota-crypto-demo/pkg/bip39/wordlist"
 )
 
 var (
@@ -41,7 +42,7 @@ const (
 	// SeedSize is the size, in bytes, of a BIP-39 seed.
 	SeedSize = 64
 
-	// default word list language
+	// default word list language.
 	defaultLanguage = "english"
 )
 

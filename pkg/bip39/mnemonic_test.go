@@ -1,3 +1,4 @@
+//nolint:scopelint
 package bip39
 
 import (

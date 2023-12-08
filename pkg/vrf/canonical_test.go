@@ -1,3 +1,4 @@
+//nolint:scopelint
 package vrf
 
 import (

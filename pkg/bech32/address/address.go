@@ -6,9 +6,10 @@ import (
 	"errors"
 	"fmt"
 
+	"golang.org/x/crypto/blake2b"
+
 	"github.com/iotaledger/iota-crypto-demo/pkg/bech32"
 	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
-	"golang.org/x/crypto/blake2b"
 )
 
 const (
@@ -28,7 +29,7 @@ var (
 // Prefix denotes the different network prefixes.
 type Prefix int
 
-// Network prefix options
+// Network prefix options.
 const (
 	IOTAMainnet Prefix = iota
 	IOTADevnet
@@ -54,7 +55,7 @@ func ParsePrefix(s string) (Prefix, error) {
 // Version denotes the version of an address.
 type Version byte
 
-// Supported address versions
+// Supported address versions.
 const (
 	Ed25519 Version = 0x00
 	Alias   Version = 0x08
@@ -159,6 +160,8 @@ func (a Ed25519Address) String() string {
 }
 
 // AddressFromPublicKey creates an address from a 32-byte hash.
+//
+//nolint:revive
 func AddressFromPublicKey(key ed25519.PublicKey) Ed25519Address {
 	if len(key) != ed25519.PublicKeySize {
 		panic("invalid public key size")

@@ -4,8 +4,9 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
 )
 
 var message = []byte("Zcash")

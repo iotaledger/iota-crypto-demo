@@ -100,6 +100,7 @@ func TestGolden(t *testing.T) {
 		assert.EqualValuesf(t, sk, privateKey, "different private key")
 		assert.EqualValuesf(t, sk[:ed25519.SeedSize], privateKey.Seed(), "different seed")
 
+		//nolint:forcetypeassert
 		publicKey := privateKey.Public().(ed25519.PublicKey)
 		assert.EqualValuesf(t, pk, publicKey, "different public key")
 

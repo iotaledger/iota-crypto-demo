@@ -1,3 +1,4 @@
+//nolint:scopelint
 package slip10_test
 
 import (
@@ -11,14 +12,15 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
 	"github.com/iotaledger/iota-crypto-demo/internal/hexutil"
 	"github.com/iotaledger/iota-crypto-demo/pkg/bip32path"
 	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
 	"github.com/iotaledger/iota-crypto-demo/pkg/slip10"
 	"github.com/iotaledger/iota-crypto-demo/pkg/slip10/eddsa"
 	"github.com/iotaledger/iota-crypto-demo/pkg/slip10/elliptic"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 type Test struct {
@@ -69,11 +71,13 @@ func TestECDSAKey(t *testing.T) {
 		require.False(t, publicKey.IsPrivate())
 
 		// sign with the private extended key
+		//nolint:forcetypeassert
 		priv := privateKey.Key.(*elliptic.PrivateKey).ECDSAPrivateKey()
 		r, s, err := ecdsa.Sign(cryptorand.Reader, priv, hashed)
 		require.NoErrorf(t, err, "sign failed")
 
 		// verify with the public extended key
+		//nolint:forcetypeassert
 		pub := publicKey.Key.(*elliptic.PublicKey).ECDSAPublicKey()
 		require.Equal(t, priv.PublicKey, *pub)
 		require.Truef(t, ecdsa.Verify(pub, hashed, r, s), "verify failed")
@@ -171,6 +175,7 @@ func BenchmarkHardenedDerivation(b *testing.B) {
 
 	var path []uint32
 	for i := 0; i < b.N; i++ {
+		//nolint:gosec
 		path = append(path, rand.Uint32()|slip10.Hardened)
 	}
 	b.ResetTimer()

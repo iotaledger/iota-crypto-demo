@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"filippo.io/edwards25519"
+
 	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
 )
 
@@ -181,6 +182,7 @@ func encodeToCurveTryAndIncrement(encodeToCurveSalt []byte, alphaString []byte) 
 	panic("edwards: unable to compute hash")
 }
 
+//nolint:gocritic
 func challengeGeneration(P1, P2 []byte, P3, P4, P5 *edwards25519.Point) *edwards25519.Scalar {
 	h := sha512.New()
 	h.Write(suiteString)
@@ -208,6 +210,8 @@ func challengeGeneration(P1, P2 []byte, P3, P4, P5 *edwards25519.Point) *edwards
 }
 
 // validateKey returns whether Y is of prime order.
+//
+//nolint:gocritic
 func validateKey(Y *edwards25519.Point) bool {
 	// Let Y' = cofactor*Y
 	checkY := new(edwards25519.Point).MultByCofactor(Y)

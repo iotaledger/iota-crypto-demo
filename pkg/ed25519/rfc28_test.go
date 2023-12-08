@@ -1,3 +1,4 @@
+//nolint:scopelint,tagliatelle
 package ed25519_test
 
 import (
@@ -7,10 +8,11 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/iotaledger/iota-crypto-demo/internal/hexutil"
 	"github.com/iotaledger/iota-crypto-demo/pkg/bech32/address"
 	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
-	"github.com/stretchr/testify/require"
 )
 
 type testCase struct {
