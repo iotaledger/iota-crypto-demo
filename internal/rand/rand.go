@@ -1,7 +1,7 @@
 package rand
 
 import (
-	"math/rand"
+	"crypto/rand"
 )
 
 // Reader is a shared instance of a pseudo-random number generator using the math/rand package.

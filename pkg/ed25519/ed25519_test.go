@@ -4,16 +4,17 @@ import (
 	"bytes"
 	"compress/gzip"
 	std "crypto/ed25519"
+	"crypto/rand"
 	"encoding/csv"
 	"encoding/hex"
-	"math/rand"
 	"os"
 	"path"
 	"testing"
 
-	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+
+	"github.com/iotaledger/iota-crypto-demo/pkg/ed25519"
 )
 
 var nullSeed = make([]byte, ed25519.SeedSize)
@@ -109,10 +110,11 @@ func TestGolden(t *testing.T) {
 }
 
 func TestSTDLib(t *testing.T) {
-	rand.Seed(1)
 	seed := make([]byte, ed25519.SeedSize)
 	for i := 0; i < 1000; i++ {
-		rand.Read(seed)
+		_, err := rand.Read(seed)
+		assert.NoError(t, err)
+
 		pub, priv, _ := ed25519.GenerateKey(bytes.NewReader(seed))
 		pubExpected, privExpected, _ := std.GenerateKey(bytes.NewReader(seed))
 		assert.EqualValuesf(t, privExpected, priv, "different private key")
@@ -129,7 +131,7 @@ func BenchmarkSign(b *testing.B) {
 	_, privateKey, _ := ed25519.GenerateKey(nil)
 	data := make([][64]byte, b.N)
 	for i := range data {
-		rand.Read(data[i][:])
+		_, _ = rand.Read(data[i][:])
 	}
 
 	b.ResetTimer()
@@ -146,7 +148,7 @@ func BenchmarkVerify(b *testing.B) {
 	}, b.N)
 	for i := range data {
 		data[i].message = make([]byte, 64)
-		rand.Read(data[i].message)
+		_, _ = rand.Read(data[i].message)
 		data[i].sig = ed25519.Sign(privateKey, data[i].message)
 	}
 
